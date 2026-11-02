@@ -1,0 +1,23 @@
+{
+  "format": "ison",
+  "version": "1.0",
+  "name": "Le vent",
+  "description": "Le vent des synthétiseurs (wind.dsp) : du bruit dans un filtre résonant dont la coupure est bougée par des rafales. La note donne le centre du vent, bend le fait glisser. Pendant que la note tient, les contrôles font glisser le sifflement, l'électricité et les rafales. Quatre notes à la fois.",
+  "family": "noise",
+  "range": [36, 96],
+  "pieces": ["vcelsli"],
+  "words": ["vent", "souffle", "sifflement", "chant", "baleine", "électrique", "rafales", "nappe"],
+  "sources": {
+    "wind": { "faust": "/__files/compositions/instruments/wind.dsp", "params": { "attack": 2, "release": 3 } }
+  },
+  "modes": {
+    "calme": { "source": "wind", "params": { "whistle": 0.15, "electric": 0, "gusts": 0.4 } },
+    "sifflant": { "source": "wind", "params": { "whistle": 0.75, "electric": 0, "gusts": 0.6 } },
+    "électrique": { "source": "wind", "params": { "whistle": 1, "electric": 1, "gusts": 0.6 } }
+  },
+  "controls": {
+    "whistle": { "cc": 1, "param": "whistle", "default": 0.3, "description": "la résonance : 0 un souffle, vers 0,7 un sifflement, 1 un chant" },
+    "electric": { "cc": 2, "param": "electric", "default": 0, "description": "la saturation du chant : 0 propre, 1 électrique" },
+    "gusts": { "cc": 3, "param": "gusts", "default": 0.5, "description": "les rafales : 0 un vent égal, 1 de fortes rafales" }
+  }
+}

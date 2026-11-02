@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ison: an instrument said in JSON (JSON Instrument Object Notation)",
+  "description": "An instrument as words rather than code: the sounds it takes (`sources`), the ways it is played (`modes`, chosen per note with the note's `variant`), how it is played (`play`), its level, its envelope and its continuous controls by name. It wraps sounds jmon/sound already plays; it contains none.",
+  "type": "object",
+  "required": ["format", "version", "name"],
+  "properties": {
+    "format": { "const": "ison" },
+    "version": { "type": "string", "description": "The ison format version, e.g. \"1.0\"." },
+    "name": { "type": "string" },
+    "description": { "type": "string", "description": "What the instrument is and how it is meant to be played, in the composer's words." },
+    "family": {
+      "type": "string",
+      "description": "The instrument's family, for defaults a host may apply (bowed strings enter a little softer): \"bowed strings\", \"plucked strings\", \"winds\", \"brass\", \"keys\", \"percussion\", \"voice\", \"synth\", \"noise\"…"
+    },
+    "range": {
+      "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 127 }, "minItems": 2, "maxItems": 2,
+      "description": "The lowest and highest MIDI notes the instrument plays."
+    },
+    "pieces": { "type": "array", "items": { "type": "string" }, "description": "The pieces that use it." },
+    "words": { "type": "array", "items": { "type": "string" }, "description": "Words to find it by: a timbre, a mood, a gesture." },
+    "sources": {
+      "type": "object",
+      "description": "The sounds, by name. Each is a spec jmon/sound plays: `{ sf2, program?, bankSelect? }`, `{ sfz }`, `{ faust, params? }`, `{ gm }`, `{ type, options }` (a Tone synth), a drum kit.",
+      "additionalProperties": { "type": "object" },
+      "minProperties": 1
+    },
+    "mode": { "type": "string", "description": "The mode a note plays in when it names none. By default, the first of `modes`." },
+    "modes": {
+      "type": "object",
+      "description": "The ways of playing, by name. A note chooses one with `variant`. The first is the default.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "source": { "type": "string", "description": "Which source plays this mode. By default, the first source." },
+          "program": { "type": "integer", "minimum": 0, "maximum": 127, "description": "For a SoundFont source: the preset." },
+          "bankSelect": { "type": "integer", "minimum": 0, "description": "For a SoundFont source: the bank number inside the file." },
+          "keyswitch": { "type": "integer", "minimum": 0, "maximum": 127, "description": "For an SFZ source: the key switch that selects this mode." },
+          "controls": { "type": "object", "description": "For an SFZ source: controller values that select this mode." },
+          "params": { "type": "object", "description": "For a Faust source: parameter values of this mode." },
+          "options": { "type": "object", "description": "For a Tone or sampled source: options of this mode, over the source's." },
+          "holds": { "type": "number", "minimum": 0, "description": "How many seconds a note of this mode sounds before its recording ends. Absent or 0: indefinitely (the recording loops, or the source is a synth)." },
+          "oneShot": { "type": "boolean", "description": "The sound plays once and dies on its own (a pizzicato, a hit): never split into strokes." },
+          "vibrato": {
+            "type": "object",
+            "description": "The vibrato the recording already has, described, so the play rules know what they have.",
+            "properties": {
+              "onset": { "type": "number", "minimum": 0, "description": "seconds before it comes" },
+              "depth": { "type": "number", "minimum": 0, "description": "cents either way" },
+              "rate": { "type": "number", "minimum": 0, "description": "Hz" }
+            }
+          },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "play": {
+      "type": "object",
+      "description": "How the instrument is played: rules a host applies to a track's notes before it schedules them (jmon/sound's performIson). Each rule is optional.",
+      "properties": {
+        "bow": {
+          "type": "object",
+          "description": "A note longer than a bow is played in equal strokes, a bow change between them.",
+          "properties": {
+            "max": { "type": "number", "exclusiveMinimum": 0, "description": "How many beats a bow lasts at most. A stroke is also never longer than what its mode's recording `holds`." },
+            "gap": { "type": "number", "minimum": 0, "description": "Beats of silence at a bow change." },
+            "change": { "type": "number", "minimum": 0, "maximum": 1, "description": "The velocity of the strokes after the first, as a proportion of the note's." }
+          }
+        },
+        "vibrato": {
+          "type": "object",
+          "description": "A stroke long enough plays in the vibrato mode, unless the note chose its own variant.",
+          "required": ["mode"],
+          "properties": {
+            "from": { "type": "number", "minimum": 0, "description": "Beats from which a stroke takes the vibrato." },
+            "mode": { "type": "string", "description": "The mode that has the vibrato." }
+          }
+        },
+        "stroke": {
+          "type": "object",
+          "description": "The shape of a stroke, as the note's `dynamics`: the numbers `bow` in jmon/algo takes.",
+          "properties": {
+            "attack": { "type": "number", "minimum": 0, "description": "Beats to the first level, at most a third of the stroke." },
+            "swell": { "type": "number", "minimum": 0, "maximum": 1, "description": "How much the stroke grows: it starts at 1 - swell of the peak." },
+            "peak": { "type": "number", "minimum": 0, "maximum": 1, "description": "Where the peak falls, as a fraction of the stroke." },
+            "fade": { "type": "number", "minimum": 0, "maximum": 1, "description": "How much it eases off by the end: it ends at 1 - fade of the peak." },
+            "minDuration": { "type": "number", "minimum": 0, "description": "Beats below which a stroke only gets a soft attack." }
+          }
+        }
+      }
+    },
+    "level": {
+      "type": "object",
+      "description": "The instrument's level, calibrated so that it sits with the others.",
+      "properties": {
+        "db": { "type": "number", "description": "A gain on the instrument's output, in dB." },
+        "velocity": { "type": "string", "enum": ["linear", "sqrt"], "description": "How the written velocity reaches the source: \"sqrt\" for a source that hears velocity as MIDI does (40·log10), so that a written 0.5 sounds half as loud rather than a quarter." }
+      }
+    },
+    "envelope": {
+      "type": "object",
+      "description": "An attack and a release, in seconds, replacing the source's own (SFZ sources).",
+      "properties": {
+        "attack": { "type": "number", "minimum": 0 },
+        "release": { "type": "number", "minimum": 0 }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "description": "The continuous controls, by name: where each goes (a controller number, or a Faust parameter), its starting value (0 to 1, or the parameter's unit), what it does.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "cc": { "type": "integer", "minimum": 0, "maximum": 127 },
+          "param": { "type": "string" },
+          "default": { "type": "number" },
+          "range": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

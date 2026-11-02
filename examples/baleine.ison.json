@@ -1,0 +1,28 @@
+{
+  "format": "ison",
+  "version": "1.0",
+  "name": "La baleine",
+  "description": "Un synthé FM en ondes sinusoïdales, qui chante en glissant d'une note à l'autre avec bend. Deux voix : ronde, et plus nasale.",
+  "family": "synth",
+  "range": [36, 84],
+  "pieces": ["jhuisl", "huxoxoc", "maioa", "ijoil"],
+  "words": ["chant", "voix", "glisse", "sous l'eau", "rond"],
+  "sources": {
+    "fm": {
+      "type": "FMSynth",
+      "options": {
+        "harmonicity": 1,
+        "modulationIndex": 12,
+        "oscillator": { "type": "sine" },
+        "modulation": { "type": "sine" },
+        "envelope": { "attack": 0.6, "decay": 0.3, "sustain": 0.9, "release": 2.5 },
+        "modulationEnvelope": { "attack": 0.5, "decay": 0.3, "sustain": 1, "release": 2 }
+      }
+    }
+  },
+  "modes": {
+    "ronde": { "source": "fm" },
+    "nasale": { "source": "fm", "options": { "modulationIndex": 16 } },
+    "lente": { "source": "fm", "options": { "envelope": { "attack": 3, "decay": 0.3, "sustain": 0.9, "release": 2.5 } }, "description": "entre en 3 secondes, pour la coda" }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@jmon/ison",
+  "version": "1.0.0",
+  "description": "ison: an instrument said in JSON. The format, its schema, and examples.",
+  "license": "GPL-3.0-or-later",
+  "repository": "github:jmonlabs/ison",
+  "files": ["ison-schema.json", "README.md", "docs", "examples", "LICENSE"]
+}

@@ -1,0 +1,20 @@
+{
+  "format": "ison",
+  "version": "1.0",
+  "name": "Violoncelle SSO",
+  "description": "Un violoncelle de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2). Ses enregistrements bouclent. Joué en coups d'archet de 4 temps au plus, comme le violon.",
+  "family": "bowed strings",
+  "range": [36, 76],
+  "words": ["violoncelle", "archet", "quatuor", "grave"],
+  "sources": {
+    "harps": { "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2" }
+  },
+  "modes": {
+    "normal": { "source": "harps", "program": 6 }
+  },
+  "play": {
+    "bow": { "max": 4, "gap": 0.15, "change": 0.85 },
+    "stroke": { "attack": 0.2, "swell": 0.15, "peak": 0.5, "fade": 0.2 }
+  },
+  "level": { "db": 5, "velocity": "linear" }
+}
