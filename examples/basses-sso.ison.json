@@ -1,0 +1,20 @@
+{
+  "format": "ison",
+  "version": "1.0",
+  "name": "Contrebasses SSO",
+  "description": "Les contrebasses de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2), pour ce qui est trop grave pour le violoncelle. Ses enregistrements bouclent.",
+  "family": "bowed strings",
+  "range": [24, 60],
+  "words": ["contrebasse", "grave", "archet"],
+  "sources": {
+    "harps": { "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2" }
+  },
+  "modes": {
+    "normal": { "source": "harps", "program": 16 }
+  },
+  "play": {
+    "bow": { "max": 4, "gap": 0.15, "change": 0.85 },
+    "stroke": { "attack": 0.2, "swell": 0.15, "peak": 0.5, "fade": 0.2 }
+  },
+  "level": { "db": 0, "velocity": "linear" }
+}

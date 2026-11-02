@@ -75,8 +75,15 @@ field; this is the shape of it.
   the velocity curve the source expects (`sqrt` for one that hears velocity as
   MIDI does).
 - `envelope`: an attack and a release in seconds, replacing the source's.
-- `controls`: the continuous controls by name, each to a controller number or a
-  parameter, with a starting value and a description.
+- `controls`: the continuous controls by name. Each one *is* a controller
+  number (`cc`), so a lane written by name is the same move for a player and
+  for a MIDI file; `param` says where it lands in a Faust DSP. With a starting
+  value and a description. A piece drives one with an automation lane whose
+  target is the name:
+
+  ```js
+  automation: { tracks: { Wind: [{ target: "whistle", anchorPoints: [{ time: 0, value: 0.2 }, { time: 16, value: 0.9 }] }] } }
+  ```
 
 ## Playing one
 
@@ -89,15 +96,19 @@ other source a node per mode, all into one output at the instrument's level.
 [jmon/show](https://github.com/jmonlabs/show) calls `performPiece` first, live
 and when rendering.
 
-What is not done yet: named `controls` in automation lanes (a lane still
-targets `midi.cc1`), `{ ison: "url" }` loaded by the player itself (a notebook
+A piece turns an instrument's settings with `sound.ison(base, changes)`, which
+merges level by level: `ison(violin, { play: { bow: { gap: 0.05 } } })` or
+`ison(whale, { mode: "slow" })`.
+
+What is not done yet: `{ ison: "url" }` loaded by the player itself (a notebook
 fetches the JSON and puts it in `synth`), `dynamics` on a Tone.js source.
 
 ## Examples
 
 `examples/` holds the first instruments written in the format: a solo violin
-with seven modes and its bowing, a viola and a cello of a string section, a
-Faust wind with three modes and three controls, an FM whale with three voices.
+with seven modes and its bowing, a viola, a cello, basses and a chamber
+section of strings, a Faust wind with three modes and three controls, an FM
+whale with three voices.
 Their sample paths are those of the author's setup. `docs/ison.fr.md` is the
 design note, in French.
 

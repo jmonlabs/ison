@@ -1,8 +1,8 @@
 {
   "format": "ison",
   "version": "1.0",
-  "name": "Le vent",
-  "description": "Le vent des synthétiseurs (wind.dsp) : du bruit dans un filtre résonant dont la coupure est bougée par des rafales. La note donne le centre du vent, bend le fait glisser. Pendant que la note tient, les contrôles font glisser le sifflement, l'électricité et les rafales. Quatre notes à la fois.",
+  "name": "Wind",
+  "description": "Le vent des synthétiseurs (wind.dsp) : du bruit dans un filtre résonant dont la coupure est bougée par des rafales. La note donne le centre du vent, bend le fait glisser. Pendant que la note tient, les contrôles font glisser le sifflement (whistle), l'électricité (electric) et les rafales (gusts). Quatre notes à la fois.",
   "family": "noise",
   "range": [36, 96],
   "pieces": ["vcelsli"],
@@ -11,9 +11,9 @@
     "wind": { "faust": "/__files/compositions/instruments/wind.dsp", "params": { "attack": 2, "release": 3 } }
   },
   "modes": {
-    "calme": { "source": "wind", "params": { "whistle": 0.15, "electric": 0, "gusts": 0.4 } },
-    "sifflant": { "source": "wind", "params": { "whistle": 0.75, "electric": 0, "gusts": 0.6 } },
-    "électrique": { "source": "wind", "params": { "whistle": 1, "electric": 1, "gusts": 0.6 } }
+    "wind": { "source": "wind", "params": { "whistle": 0.3, "electric": 0, "gusts": 0.5 }, "description": "un souffle, le vent calme" },
+    "whistling": { "source": "wind", "params": { "whistle": 0.75, "electric": 0, "gusts": 0.6 } },
+    "electric": { "source": "wind", "params": { "whistle": 1, "electric": 1, "gusts": 0.6 } }
   },
   "controls": {
     "whistle": { "cc": 1, "param": "whistle", "default": 0.3, "description": "la résonance : 0 un souffle, vers 0,7 un sifflement, 1 un chant" },
