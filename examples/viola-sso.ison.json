@@ -2,19 +2,46 @@
   "format": "ison",
   "version": "1.0",
   "name": "Alto SSO",
-  "description": "Un alto de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2). Ses enregistrements bouclent : une note tient autant qu'on veut, mais elle est tenue égale. Jouée en coups d'archet de 4 temps au plus, comme le violon, pour respirer avec lui.",
+  "description": "Un alto de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2). Ses enregistrements bouclent : une note tient autant qu'on veut, mais elle est tenue égale. Jouée en coups d'archet de 4 temps au plus, comme le violon, pour respirer avec lui. Le son s'éteint vite quand l'archet quitte la corde (contrôleur 72 à 16 : l'extinction du preset, environ 4 fois plus courte) ; sinon le changement d'archet ne s'entend pas.",
   "family": "bowed strings",
-  "range": [48, 88],
-  "words": ["alto", "archet", "quatuor"],
+  "range": [
+    48,
+    88
+  ],
+  "words": [
+    "alto",
+    "archet",
+    "quatuor"
+  ],
   "sources": {
-    "harps": { "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2" }
+    "harps": {
+      "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2",
+      "controllers": {
+        "72": 16
+      }
+    }
   },
   "modes": {
-    "normal": { "source": "harps", "program": 14 }
+    "normal": {
+      "source": "harps",
+      "program": 14
+    }
   },
   "play": {
-    "bow": { "max": 4, "gap": 0.15, "change": 0.85 },
-    "stroke": { "attack": 0.2, "swell": 0.15, "peak": 0.5, "fade": 0.2 }
+    "bow": {
+      "max": 4,
+      "gap": 0.15,
+      "change": 0.85
+    },
+    "stroke": {
+      "attack": 0.2,
+      "swell": 0.15,
+      "peak": 0.5,
+      "fade": 0.2
+    }
   },
-  "level": { "db": 6, "velocity": "linear" }
+  "level": {
+    "db": 6,
+    "velocity": "linear"
+  }
 }

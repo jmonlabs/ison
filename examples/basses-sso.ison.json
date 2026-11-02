@@ -2,19 +2,46 @@
   "format": "ison",
   "version": "1.0",
   "name": "Contrebasses SSO",
-  "description": "Les contrebasses de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2), pour ce qui est trop grave pour le violoncelle. Ses enregistrements bouclent.",
+  "description": "Les contrebasses de pupitre (Sonatina, dans Harps-Strings-quatuor.sf2), pour ce qui est trop grave pour le violoncelle. Ses enregistrements bouclent. Le son s'éteint vite quand l'archet quitte la corde (contrôleur 72 à 16 : l'extinction du preset, environ 4 fois plus courte) ; sinon le changement d'archet ne s'entend pas.",
   "family": "bowed strings",
-  "range": [24, 60],
-  "words": ["contrebasse", "grave", "archet"],
+  "range": [
+    24,
+    60
+  ],
+  "words": [
+    "contrebasse",
+    "grave",
+    "archet"
+  ],
   "sources": {
-    "harps": { "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2" }
+    "harps": {
+      "sf2": "/__files/samples/soundfonts/Harps-Strings-quatuor.sf2",
+      "controllers": {
+        "72": 16
+      }
+    }
   },
   "modes": {
-    "normal": { "source": "harps", "program": 16 }
+    "normal": {
+      "source": "harps",
+      "program": 16
+    }
   },
   "play": {
-    "bow": { "max": 4, "gap": 0.15, "change": 0.85 },
-    "stroke": { "attack": 0.2, "swell": 0.15, "peak": 0.5, "fade": 0.2 }
+    "bow": {
+      "max": 4,
+      "gap": 0.15,
+      "change": 0.85
+    },
+    "stroke": {
+      "attack": 0.2,
+      "swell": 0.15,
+      "peak": 0.5,
+      "fade": 0.2
+    }
   },
-  "level": { "db": 0, "velocity": "linear" }
+  "level": {
+    "db": 0,
+    "velocity": "linear"
+  }
 }

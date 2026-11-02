@@ -54,7 +54,7 @@
     },
     "sources": {
       "type": "object",
-      "description": "The sounds, by name. Each is a spec jmon/sound plays: `{ sf2, program?, bankSelect? }`, `{ sfz }`, `{ faust, params? }`, `{ gm }`, `{ type, options }` (a Tone synth), a drum kit.",
+      "description": "The sounds, by name. Each is a spec jmon/sound plays: `{ sf2, program?, bankSelect? }`, `{ sfz }`, `{ faust, params? }`, `{ gm }`, `{ type, options }` (a Tone synth), a drum kit. A SoundFont source sets its preset's envelope with `controllers`, relative to the preset's own (64): 73 the attack, 72 the release, 0 about eight times shorter, 127 eight times longer.",
       "additionalProperties": {
         "type": "object"
       },
@@ -239,7 +239,7 @@
     },
     "envelope": {
       "type": "object",
-      "description": "An attack and a release, in seconds, replacing the source's own (SFZ sources).",
+      "description": "An attack and a release, in seconds, replacing an SFZ source's own. A SoundFont source has no seconds to replace: its envelope is scaled with `controllers` 73 and 72 (see `sources`).",
       "properties": {
         "attack": {
           "type": "number",

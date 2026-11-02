@@ -2,30 +2,101 @@
   "format": "ison",
   "version": "1.0",
   "name": "Violon LDK",
-  "description": "Un violon solo enregistré dans tous ses modes de jeu (Violin_LDK1609.sf2). Aucun enregistrement ne tient plus de 4 à 5 s : une note longue se joue en coups d'archet de 4 temps au plus, avec un changement d'archet entre eux, et le vibrato enregistré sur les coups de 2 temps et plus. Il entre droit pendant une demi-seconde, puis le vibrato s'installe (9 cents, 5 Hz).",
+  "description": "Un violon solo enregistré dans tous ses modes de jeu (Violin_LDK1609.sf2). Aucun enregistrement ne tient plus de 4 à 5 s : une note longue se joue en coups d'archet de 4 temps au plus, avec un changement d'archet entre eux, et le vibrato enregistré sur les coups de 2 temps et plus. Il entre droit pendant une demi-seconde, puis le vibrato s'installe (9 cents, 5 Hz). Le son s'éteint vite quand l'archet quitte la corde (contrôleur 72 à 16 : l'extinction du preset, environ 4 fois plus courte) ; sinon le changement d'archet ne s'entend pas.",
   "family": "bowed strings",
-  "range": [55, 100],
+  "range": [
+    55,
+    100
+  ],
   "pieces": [],
-  "words": ["violon", "archet", "vibrato", "pizzicato", "tremolo", "quatuor"],
+  "words": [
+    "violon",
+    "archet",
+    "vibrato",
+    "pizzicato",
+    "tremolo",
+    "quatuor"
+  ],
   "sources": {
-    "ldk": { "sf2": "/__files/samples/soundfonts/Violin_LDK1609.sf2" }
+    "ldk": {
+      "sf2": "/__files/samples/soundfonts/Violin_LDK1609.sf2",
+      "controllers": {
+        "72": 16
+      }
+    }
   },
   "modes": {
-    "normal": { "source": "ldk", "program": 0, "holds": 5, "description": "sans vibrato" },
-    "vibrato": { "source": "ldk", "program": 11, "holds": 4, "vibrato": { "onset": 0.5, "depth": 9, "rate": 5 } },
-    "arco": { "source": "ldk", "program": 2, "holds": 5, "description": "arco vibrato, un vibrato plus léger" },
-    "tremolo": { "source": "ldk", "program": 4, "holds": 4 },
-    "spiccato": { "source": "ldk", "program": 5, "holds": 1, "oneShot": true },
-    "pizzicato": { "source": "ldk", "program": 15, "holds": 1.5, "oneShot": true },
-    "martellato": { "source": "ldk", "program": 19, "holds": 3.5 }
+    "normal": {
+      "source": "ldk",
+      "program": 0,
+      "holds": 5,
+      "description": "sans vibrato"
+    },
+    "vibrato": {
+      "source": "ldk",
+      "program": 11,
+      "holds": 4,
+      "vibrato": {
+        "onset": 0.5,
+        "depth": 9,
+        "rate": 5
+      }
+    },
+    "arco": {
+      "source": "ldk",
+      "program": 2,
+      "holds": 5,
+      "description": "arco vibrato, un vibrato plus léger"
+    },
+    "tremolo": {
+      "source": "ldk",
+      "program": 4,
+      "holds": 4
+    },
+    "spiccato": {
+      "source": "ldk",
+      "program": 5,
+      "holds": 1,
+      "oneShot": true
+    },
+    "pizzicato": {
+      "source": "ldk",
+      "program": 15,
+      "holds": 1.5,
+      "oneShot": true
+    },
+    "martellato": {
+      "source": "ldk",
+      "program": 19,
+      "holds": 3.5
+    }
   },
   "play": {
-    "bow": { "max": 4, "gap": 0.15, "change": 0.85 },
-    "vibrato": { "from": 2, "mode": "vibrato" },
-    "stroke": { "attack": 0.2, "swell": 0.15, "peak": 0.5, "fade": 0.2 }
+    "bow": {
+      "max": 4,
+      "gap": 0.15,
+      "change": 0.85
+    },
+    "vibrato": {
+      "from": 2,
+      "mode": "vibrato"
+    },
+    "stroke": {
+      "attack": 0.2,
+      "swell": 0.15,
+      "peak": 0.5,
+      "fade": 0.2
+    }
   },
-  "level": { "db": 0, "velocity": "linear" },
+  "level": {
+    "db": 0,
+    "velocity": "linear"
+  },
   "controls": {
-    "vibrato": { "cc": 1, "default": 0, "description": "un vibrato de synthèse par-dessus l'enregistrement, de 0 à 1" }
+    "vibrato": {
+      "cc": 1,
+      "default": 0,
+      "description": "un vibrato de synthèse par-dessus l'enregistrement, de 0 à 1"
+    }
   }
 }

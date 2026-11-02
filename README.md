@@ -74,7 +74,11 @@ field; this is the shape of it.
 - `level`: a gain in dB, calibrated so the instrument sits with the others, and
   the velocity curve the source expects (`sqrt` for one that hears velocity as
   MIDI does).
-- `envelope`: an attack and a release in seconds, replacing the source's.
+- `envelope`: an attack and a release in seconds, replacing an SFZ source's.
+  A SoundFont preset's envelope is scaled instead, relative to its own, with
+  the source's `controllers`: 73 the attack, 72 the release (64 the preset's,
+  0 about eight times shorter). A bowed string whose release is too long
+  hides its bow changes.
 - `controls`: the continuous controls by name. Each one *is* a controller
   number (`cc`), so a lane written by name is the same move for a player and
   for a MIDI file; `param` says where it lands in a Faust DSP. With a starting
