@@ -68,7 +68,8 @@ field; this is the shape of it.
 - `play`: how the instrument is played. Rules a host applies to a track's notes
   before scheduling them: `bow` (a note longer than `max` beats, or than what
   its mode holds, is played in equal strokes, `gap` beats apart, the next at
-  `change` of the velocity), `vibrato` (a stroke of `from` beats or more plays in
+  `change` of the velocity; with `grid`, the strokes are cut on the piece's
+  grid instead, so every voice changes bow together), `vibrato` (a stroke of `from` beats or more plays in
   the mode named), `stroke` (the loudness shape of a stroke, written as the
   note's `dynamics`). More will come from other instruments: a breath, a pedal.
 - `level`: a gain in dB, calibrated so the instrument sits with the others, and

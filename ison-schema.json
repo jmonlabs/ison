@@ -145,7 +145,7 @@
       "properties": {
         "bow": {
           "type": "object",
-          "description": "A note longer than a bow is played in equal strokes, a bow change between them.",
+          "description": "A note longer than a bow is played in strokes, a bow change between them: equal strokes of at most `max` beats, or, with `grid`, strokes cut on the piece's grid, so that every voice changes bow together.",
           "properties": {
             "max": {
               "type": "number",
@@ -162,6 +162,11 @@
               "minimum": 0,
               "maximum": 1,
               "description": "The velocity of the strokes after the first, as a proportion of the note's."
+            },
+            "grid": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Beats: the strokes are cut where the piece's time is a multiple of `grid` (a note starting between two lines is cut at the next one). Each stroke is also no longer than `max`, nor than what the recording holds."
             }
           }
         },
