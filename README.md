@@ -79,7 +79,10 @@ field; this is the shape of it.
   A SoundFont preset's envelope is scaled instead, relative to its own, with
   the source's `controllers`: 73 the attack, 72 the release (64 the preset's,
   0 about eight times shorter). A bowed string whose release is too long
-  hides its bow changes.
+  hides its bow changes. A sampled source, or a mode, may also skip the first seconds of its
+  recordings with `start`: a recording that takes time to speak (a bow
+  catching the string) then starts on the beat. An envelope can make an
+  attack slower than its recording, never faster; `start` can.
 - `controls`: the continuous controls by name. Each one *is* a controller
   number (`cc`), so a lane written by name is the same move for a player and
   for a MIDI file; `param` says where it lands in a Faust DSP. With a starting

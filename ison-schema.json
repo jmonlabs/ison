@@ -54,7 +54,7 @@
     },
     "sources": {
       "type": "object",
-      "description": "The sounds, by name. Each is a spec jmon/sound plays: `{ sf2, program?, bankSelect? }`, `{ sfz }`, `{ faust, params? }`, `{ gm }`, `{ type, options }` (a Tone synth), a drum kit. A SoundFont source sets its preset's envelope with `controllers`, relative to the preset's own (64): 73 the attack, 72 the release, 0 about eight times shorter, 127 eight times longer.",
+      "description": "The sounds, by name. Each is a spec jmon/sound plays: `{ sf2, program?, bankSelect? }`, `{ sfz }`, `{ faust, params? }`, `{ gm }`, `{ type, options }` (a Tone synth), a drum kit. A SoundFont source sets its preset's envelope with `controllers`, relative to the preset's own (64): 73 the attack, 72 the release, 0 about eight times shorter, 127 eight times longer. A SoundFont or SFZ source may skip the first seconds of its recordings with `start` (see the modes).",
       "additionalProperties": {
         "type": "object"
       },
@@ -102,6 +102,11 @@
           "options": {
             "type": "object",
             "description": "For a Tone or sampled source: options of this mode, over the source's."
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "description": "For a sampled source: seconds of every recording skipped at the start of a note, over the source's own `start`. Where a recording takes time to speak (a bow catching the string, a breath), the note starts already sounding, on the beat. A shaping envelope can make an attack slower than its recording, never faster: this can. SFZ `offset`, SoundFont `startAddrsOffset` (at most 0.19 s at 44.1 kHz)."
           },
           "holds": {
             "type": "number",

@@ -22,7 +22,8 @@
       "sf2": "/__files/samples/soundfonts/Violin_LDK1609.sf2",
       "controllers": {
         "72": 16
-      }
+      },
+      "start": 0.15
     }
   },
   "modes": {
