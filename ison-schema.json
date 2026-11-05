@@ -108,6 +108,28 @@
             "minimum": 0,
             "description": "For a sampled source: seconds of every recording skipped at the start of a note, over the source's own `start`. Where a recording takes time to speak (a bow catching the string, a breath), the note starts already sounding, on the beat. A shaping envelope can make an attack slower than its recording, never faster: this can. SFZ `offset`, SoundFont `startAddrsOffset` (at most 0.19 s at 44.1 kHz)."
           },
+          "layers": {
+            "type": "array",
+            "description": "A mode made of other modes, sounding together, like a sampler's multi: a note in this mode becomes one note per layer. Such a mode has no source of its own. Each layer names a mode (`mode`, which has no layers itself) and how it joins: `transpose` (semitones), `delay` (seconds later, and as much shorter, so the layers end together), `db` (louder or softer), `detune` (cents), `spread` (`{ cents, delay }`: each layer of each note moved by a different amount within these bounds, the same on every play, so two notes never sound quite alike).",
+            "items": {
+              "type": "object",
+              "required": ["mode"],
+              "properties": {
+                "mode": { "type": "string" },
+                "transpose": { "type": "number" },
+                "delay": { "type": "number", "minimum": 0 },
+                "db": { "type": "number" },
+                "detune": { "type": "number" },
+                "spread": { "type": "object", "properties": { "cents": { "type": "number", "minimum": 0 }, "delay": { "type": "number", "minimum": 0 } } }
+              }
+            }
+          },
+          "pan": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Where this mode sounds, -1 left to 1 right. Layers in different places give an instrument its depth."
+          },
           "holds": {
             "type": "number",
             "minimum": 0,
@@ -271,6 +293,10 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 127
+          },
+          "mode": {
+            "type": "string",
+            "description": "The mode whose level this control turns, 0 silent to 1 full: a control that doses the layers of an instrument while its notes sound."
           },
           "param": {
             "type": "string"

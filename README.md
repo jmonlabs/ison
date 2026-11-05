@@ -65,6 +65,10 @@ field; this is the shape of it.
   `options`), then what the sound does: `holds`, how many seconds a note lasts
   before the recording ends; `oneShot`; the `vibrato` the recording already
   has. The first mode is the default; a note chooses another with `variant`.
+  A mode may also be made of other modes sounding together (`layers`, like a
+  sampler's multi): each layer names a mode, with its `transpose`, `delay`,
+  `db`, `detune` and a `spread` that moves each note a little, differently
+  every time. A mode may have its place in space (`pan`).
 - `play`: how the instrument is played. Rules a host applies to a track's notes
   before scheduling them: `bow` (a note longer than `max` beats, or than what
   its mode holds, is played in equal strokes, `gap` beats apart, the next at
@@ -85,7 +89,8 @@ field; this is the shape of it.
   attack slower than its recording, never faster; `start` can.
 - `controls`: the continuous controls by name. Each one *is* a controller
   number (`cc`), so a lane written by name is the same move for a player and
-  for a MIDI file; `param` says where it lands in a Faust DSP. With a starting
+  for a MIDI file; `param` says where it lands in a Faust DSP, `mode` that it
+  turns the level of a mode (to dose the layers of an instrument). With a starting
   value and a description. A piece drives one with an automation lane whose
   target is the name:
 
